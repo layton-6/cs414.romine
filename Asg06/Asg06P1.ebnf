@@ -1,0 +1,22 @@
+(* William Romine *)
+(* 00103649 *)
+(* Dr. Lewis CS414 *)
+
+(* https://tomassetti.me/ebnf/ *)
+
+(* Tokens *)
+command = "ls" | "cd" | "cat" | "print" | "exec";
+filename = name, ".", extension;
+name = letter, { letter }; (* 1 to 8 letters *)
+extension = letter, { letter }; (* 1 to 3 letters *)
+path = "\", { name, "\" }; (* Folder names, separated by backslashes *)
+letter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" 
+         | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+
+(* Variables *)
+command_line = command, [ argument ]; (* The command optionally followed by an argument *)
+
+argument = path | filename; (* Argument can be either a path or a filename *)
+
+(* Start Symbol *)
+start = command_line;
