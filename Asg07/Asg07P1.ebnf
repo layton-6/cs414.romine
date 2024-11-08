@@ -1,0 +1,30 @@
+(* William Romine *)
+(* 00103649 *)
+(* Dr. Lewis CS414 *)
+
+(* https://tomassetti.me/ebnf/ *)
+(* # https://realpython.com/python-command-line-arguments/#argparse
+ *)
+
+(* Tokens *)
+command = "ls" | "cd" | "cat" | "print" | "exec";
+filename = name, ".", extension;
+variable = "$", name; (* Variable starts with $ *)
+name = letter, { letter | digit }; (* 1 to 8 letters or digits *)
+extension = letter, { letter }; (* 1 to 3 letters *)
+path = "\", { name, "\" }; (* Folder names, separated by backslashes *)
+letter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" 
+         | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+
+(* Extended Variables *)
+command_line = command | set_command | echo_command; (* Command line can be a regular command, set_command, or echo_command *)
+
+(* New Commands *)
+set_command = "SET", variable, "=", value; (* SET command to assign a value to a variable *)
+echo_command = "echo", variable; (* Echo command to display variable content *)
+
+value = letter, { letter | digit | " " }; (* Value can be any string of letters, digits, or spaces *)
+
+(* Start Symbol *)
+start = command_line;
